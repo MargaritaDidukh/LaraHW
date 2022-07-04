@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\BookController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +16,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
-//Route::get('/test', [TestController::class, 'show']);
-//Route::get('/list', [BookController::class, 'books'])->name('book');
-//Route::prefix('books')->name('books.')->group(function(){
-//    Route::get('/', [BookController::class, 'books'])->name('list');
-//    Route::get('/add', [BookController::class, 'add'])->name('add');
-//    Route::get('/{id}', [BookController::class, 'view'])->whereNumber('id')->name('view');
-//});
+
+
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/users', 'showUsers');
+    Route::get('/users/{id}', 'showUser');
+    Route::put('/users/{id}', 'addUser')->name('addUser');
+    Route::post('/users/{id}', 'updateUser')->name('updateUser');
+    Route::delete('/users/{id}', 'deleteUser')->name('deleteUser');
+    Route::get('/users/{id}/videos', 'listVideosOfUser')->name('listVideosOfUser');
+    Route::get('/videos', 'listVideos')->name('listVideos');
+    Route::get('/videos/{id}', 'videoPage');
+    Route::post('/videos/{id}', 'updateVideo');
+    Route::put('/videos/{id}', 'addVideo');
+    Route::delete('/videos/{id}', 'deleteVideo');
+});

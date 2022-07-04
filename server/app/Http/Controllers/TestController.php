@@ -8,6 +8,7 @@ class TestController extends Controller
 {
     public function show()
     {
+        dd(35);
         return 'TestController';
     }
 }
